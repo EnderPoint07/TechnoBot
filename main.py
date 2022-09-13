@@ -1,3 +1,4 @@
+import os
 from itertools import cycle
 
 import aiohttp
@@ -7,8 +8,11 @@ from discord.ext import tasks
 
 import getRandRow
 
-BotToken = ''
-WEBHOOK_URL = ""
+from boto.s3.connection import S3Connection
+
+BotToken = S3Connection(os.environ['BotToken'])
+WEBHOOK_URL = S3Connection(os.environ['WEBHOOK_URL'])
+TEST = S3Connection(os.environ['TEST'])
 
 status = cycle(
     ['Destroying Nerds in a Block Game', 'Sacrificing Nerds To The Blood God'])
@@ -63,6 +67,9 @@ class MyClient(discord.Client):
 
             else:
                 await message.reply('Cause why not?')
+
+        if message.content == '!test':
+            await message.reply(TEST)
 
 intents = discord.Intents.all()
 client = MyClient(intents=intents)
