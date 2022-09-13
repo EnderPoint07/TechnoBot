@@ -8,11 +8,9 @@ from discord.ext import tasks
 
 import getRandRow
 
-from boto.s3.connection import S3Connection
-
-BotToken = S3Connection(os.environ['BotToken'])
-WEBHOOK_URL = S3Connection(os.environ['WEBHOOK_URL'])
-TEST = S3Connection(os.environ['TEST'])
+BotToken = os.environ['BotToken']
+WEBHOOK_URL = os.environ['WEBHOOK_URL']
+TEST = os.environ['TEST']
 
 status = cycle(
     ['Destroying Nerds in a Block Game', 'Sacrificing Nerds To The Blood God'])
